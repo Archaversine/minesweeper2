@@ -20,6 +20,9 @@ var target_light_scale = 20
 var cam_trauma = 0.0
 var cam_trauma_power = 2 # Exponent
 
+func _ready():
+	$PointLight2D.scale = Vector2.ZERO
+
 func _physics_process(delta):
 	if not alive:
 		return

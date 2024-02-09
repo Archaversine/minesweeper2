@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cn3kpg8b8h378"]
+[gd_scene load_steps=9 format=3 uid="uid://cn3kpg8b8h378"]
 
 [ext_resource type="PackedScene" uid="uid://8vetmq48o32n" path="res://tile_map.tscn" id="1_4wrx2"]
 [ext_resource type="Texture2D" uid="uid://cmjg8wa2645xw" path="res://light.png" id="1_lynwf"]
@@ -43,9 +43,38 @@ tracks/1/keys = {
 "values": [Color(1, 1, 0.670588, 0), Color(1, 1, 0.670588, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ox2jq"]
+resource_name = "fade_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer2/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/CanvasModulate/PointLight2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0.670588, 1), Color(1, 1, 0.670588, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q0y4k"]
 _data = {
-"fade_in": SubResource("Animation_xtk3q")
+"fade_in": SubResource("Animation_xtk3q"),
+"fade_out": SubResource("Animation_ox2jq")
 }
 
 [node name="MainMenu" type="Control"]
@@ -66,7 +95,7 @@ color = Color(0, 0, 0, 1)
 [node name="PointLight2D" type="PointLight2D" parent="CanvasLayer/CanvasModulate"]
 position = Vector2(583, 311)
 scale = Vector2(40, 30)
-color = Color(1, 1, 0.670588, 1)
+color = Color(1, 1, 0.670588, 0)
 texture = ExtResource("1_lynwf")
 
 [node name="TileMap" parent="CanvasLayer" instance=ExtResource("1_4wrx2")]
@@ -96,6 +125,7 @@ text = "START GAME"
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer2"]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.311
@@ -116,3 +146,6 @@ text = "ESCAPE THE MINES"
 libraries = {
 "": SubResource("AnimationLibrary_q0y4k")
 }
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
