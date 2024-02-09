@@ -81,6 +81,10 @@ func mine_tile(mouse_coords):
 	if !get_cell_tile_data(0, tile).get_custom_data("mineable"):
 		return
 	
+	var particles = load("res://tile_break_particles.tscn").instantiate()
+	particles.global_position = to_global(map_to_local(tile))
+	get_parent().add_child(particles)
+	
 	if mines.has(tile):
 		set_cell(0, tile, 0, Vector2i(2, 0), 0)
 		

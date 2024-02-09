@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciggngr5fal3t"]
+
+[ext_resource type="Script" path="res://tile_break_particles.gd" id="1_2rdj1"]
+
+[node name="TileBreakParticles" type="CPUParticles2D"]
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+emission_shape = 3
+emission_rect_extents = Vector2(5, 5)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+script = ExtResource("1_2rdj1")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
