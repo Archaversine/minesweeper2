@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://iwa4hurv8fyr"]
+
+[ext_resource type="Texture2D" uid="uid://g8navar7ncs" path="res://beacon.png" id="1_qo087"]
+[ext_resource type="Script" path="res://beacon_light.gd" id="2_s8lx3"]
+
+[node name="BeaconLight" type="PointLight2D"]
+scale = Vector2(15, 15)
+texture = ExtResource("1_qo087")
+script = ExtResource("2_s8lx3")

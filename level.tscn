@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5uvi3223etk0"]
+
+[ext_resource type="PackedScene" uid="uid://8vetmq48o32n" path="res://tile_map.tscn" id="1_dm3v0"]
+[ext_resource type="Script" path="res://level.gd" id="1_hpro8"]
+[ext_resource type="PackedScene" uid="uid://w5u6idihkwxn" path="res://player.tscn" id="2_bfqlt"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_hpro8")
+
+[node name="MineTiles" parent="." instance=ExtResource("1_dm3v0")]
+rendering_quadrant_size = 10
+grid_size = 60
+dark_thickness = 15
+light_mine_chance = 0.28
+dark_mine_chance = 0.2
+
+[node name="Player" parent="." instance=ExtResource("2_bfqlt")]
+position = Vector2(577, 376)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[connection signal="explosion" from="MineTiles" to="." method="_on_mine_tiles_explosion"]
+[connection signal="player_die" from="Player" to="." method="_on_player_player_die"]

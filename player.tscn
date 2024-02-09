@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://w5u6idihkwxn"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_ileg4"]
+[ext_resource type="Texture2D" uid="uid://bsus5e7t1qvuw" path="res://player.png" id="1_ud6cm"]
+[ext_resource type="PackedScene" uid="uid://dd3b2q6ln2l77" path="res://health_bar.tscn" id="2_jler1"]
+[ext_resource type="Texture2D" uid="uid://cmjg8wa2645xw" path="res://light.png" id="4_nmuag"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ytcyd"]
+size = Vector2(30, 15)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_ileg4")
+
+[node name="HealthBar" parent="." instance=ExtResource("2_jler1")]
+offset_left = -25.0
+offset_top = -29.0
+offset_right = 25.0
+offset_bottom = -14.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_ud6cm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_ytcyd")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+position_smoothing_enabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(20, 20)
+color = Color(0.988235, 1, 0.603922, 1)
+shadow_color = Color(0.156863, 0.156863, 0, 1)
+texture = ExtResource("4_nmuag")
+
+[node name="RegenTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="RegenTimer" to="." method="_on_regen_timer_timeout"]
