@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://xipma7l1x3se"]
+[gd_scene load_steps=7 format=3 uid="uid://xipma7l1x3se"]
 
 [ext_resource type="Script" path="res://game_over.gd" id="1_q6t84"]
 [ext_resource type="FontFile" uid="uid://duvy0j0dljx28" path="res://font.ttf" id="1_s5r6t"]
 [ext_resource type="PackedScene" uid="uid://8vetmq48o32n" path="res://tile_map.tscn" id="2_kyn86"]
+[ext_resource type="Texture2D" uid="uid://cmjg8wa2645xw" path="res://light.png" id="4_i1shj"]
 
 [sub_resource type="Animation" id="Animation_n7i7l"]
 resource_name = "fade_in"
@@ -31,6 +32,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LabelLight:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(6.5, 12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 0.670588)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hudmx"]
 _data = {
@@ -55,24 +68,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0627451, 0.0627451, 0.0627451, 1)
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -46.0
-offset_top = -11.5
-offset_right = 46.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
-theme_override_fonts/font = ExtResource("1_s5r6t")
-theme_override_font_sizes/font_size = 64
-text = "YOU WERE SEALED"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_hudmx")
@@ -81,6 +76,69 @@ libraries = {
 [node name="TileMap" parent="." instance=ExtResource("2_kyn86")]
 layer_0/tile_data = PackedInt32Array(0, 0, 1, 65536, 0, 1, 131072, 0, 1, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1, 6, 0, 1, 65540, 0, 1, 65539, 0, 1, 65538, 0, 1, 65537, 0, 1, 786454, 0, 1, 786453, 0, 1, 786452, 0, 1, 786451, 0, 1, 786450, 0, 1, 786449, 0, 1, 786448, 0, 1, 720915, 0, 1, 720916, 0, 1, 720917, 0, 1, 720918, 0, 1, 655382, 0, 1, 589846, 0, 1, 524310, 0, 1, 589845, 0, 1, 655381, 0, 1, 20, 0, 1, 65556, 0, 1, 65557, 0, 1, 21, 0, 1, 22, 0, 1, 65558, 0, 1, 19, 0, 1, 18, 0, 1, 17, 0, 1, 786432, 0, 1, 786438, 0, 1, 786437, 0, 1, 786436, 0, 1, 786435, 0, 1, 786434, 0, 1, 786433, 0, 1, 720898, 0, 1, 720897, 0, 1, 720896, 0, 1, 655360, 0, 1, 720899, 0, 1, 720900, 0, 1, 655361, 0, 1, 655362, 262144, 1, 131073, 393216, 1, 65555, 327680, 1, 655380, 458752, 1, 786442, 196608, 1, 786443, 196608, 1, 786444, 196608, 1, 589826, 196608, 1, 589825, 196608, 1, 589824, 196608, 1, 655363, 196608, 1, 655364, 196608, 1, 196608, 196608, 1, 196609, 196608, 1, 131074, 262144, 1, 131075, 196608, 1, 65554, 262144, 1, 65553, 196608, 1, 131093, 196608, 1, 131094, 196608, 1, 589844, 262144, 1, 655379, 262144, 1, 655378, 196608, 1, 720914, 196608, 1, 524308, 196608, 1, 524309, 196608, 1)
 generate = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.407843, 0.407843, 0.407843, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="CanvasModulate"]
+position = Vector2(124, 523)
+scale = Vector2(5, 5)
+color = Color(0.0235294, 0.552941, 0, 1)
+energy = 16.0
+texture = ExtResource("4_i1shj")
+
+[node name="PointLight2D2" type="PointLight2D" parent="CanvasModulate"]
+position = Vector2(976, 74)
+scale = Vector2(5, 5)
+color = Color(0.913725, 0, 0, 1)
+energy = 16.0
+texture = ExtResource("4_i1shj")
+
+[node name="PointLight2D3" type="PointLight2D" parent="CanvasModulate"]
+position = Vector2(73, 124)
+scale = Vector2(5, 5)
+color = Color(0, 0.227451, 0.733333, 1)
+energy = 16.0
+texture = ExtResource("4_i1shj")
+
+[node name="PointLight2D4" type="PointLight2D" parent="CanvasModulate"]
+position = Vector2(1024, 526)
+scale = Vector2(5, 5)
+color = Color(0.490196, 0, 0, 1)
+energy = 16.0
+texture = ExtResource("4_i1shj")
+
+[node name="PointLight2D5" type="PointLight2D" parent="CanvasModulate"]
+position = Vector2(577, 628)
+scale = Vector2(5, 5)
+color = Color(0, 0.309804, 1, 1)
+energy = 16.0
+texture = ExtResource("4_i1shj")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -308.0
+offset_top = -34.0
+offset_right = 308.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+theme_override_fonts/font = ExtResource("1_s5r6t")
+theme_override_font_sizes/font_size = 64
+text = "YOU WERE SEALED"
+
+[node name="LabelLight" type="PointLight2D" parent="."]
+position = Vector2(566, 294)
+scale = Vector2(30, 30)
+color = Color(1, 0, 0, 0)
+energy = 16.0
+texture = ExtResource("4_i1shj")
 
 [node name="FadeRect" type="ColorRect" parent="."]
 layout_mode = 1
