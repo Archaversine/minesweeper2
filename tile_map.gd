@@ -13,6 +13,7 @@ signal explosion
 @export var dark_mine_chance = 0.1
 
 @export var beacon_chance = 0.05
+@export var refill_chance = 0.2
 
 var mines = {} 
 var numbers = {}
@@ -167,3 +168,39 @@ func glow(number, pos):
 	g.scale = Vector2(1, 1) * number * 5
 	
 	get_parent().add_child(g)
+
+func refill_tiles(player_pos, min_distance):
+	for tile in get_used_cells(0):
+		if !get_cell_tile_data(0, tile).get_custom_data("refillable"):
+			continue
+		
+		# TODO: Check if tile is beacon tile to remove light
+		
+		if randf() <= refill_chance:
+			print("trying")
+			
+			var global_tile = to_global(map_to_local(tile))
+			
+			var x2 = (player_pos.x - global_tile.x) * (player_pos.x - global_tile.x)
+			var y2 = (player_pos.y - global_tile.y) * (player_pos.y - global_tile.y)
+			
+			if x2 + y2 <= min_distance * min_distance:
+				print("skipping")
+				continue
+			
+			if get_cell_atlas_coords(0, tile) == Vector2i(0, 1):
+				set_cell(0, tile, 0, Vector2i(1, 1), 0) # Dark tile
+			else:
+				set_cell(0, tile, 0, Vector2i(0, 0), 0)
+
+
+
+
+
+
+
+
+
+
+
+

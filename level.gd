@@ -34,3 +34,4 @@ func _on_player_player_die():
 
 func _on_mine_tiles_explosion():
 	$Player.add_cam_trauma(1)
+	$MineTiles.refill_tiles($Player.global_position, 50 * 6) # roughly 6 tiles
