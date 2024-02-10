@@ -11,7 +11,7 @@ script = ExtResource("1_hpro8")
 rendering_quadrant_size = 10
 grid_size = 60
 dark_thickness = 15
-light_mine_chance = 0.28
+light_mine_chance = 0.27
 dark_mine_chance = 0.2
 
 [node name="Player" parent="." instance=ExtResource("2_bfqlt")]
