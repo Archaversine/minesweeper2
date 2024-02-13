@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://o0e5h3ualbtf"]
+[gd_scene load_steps=4 format=3 uid="uid://o0e5h3ualbtf"]
 
 [ext_resource type="Texture2D" uid="uid://dr8223jg3ji41" path="res://enemy.png" id="1_1mmmm"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_glvbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kbrhl"]
 size = Vector2(30, 15)
 
 [node name="Enemy" type="RigidBody2D"]
 gravity_scale = 0.0
+script = ExtResource("1_glvbg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(5, 5)
@@ -15,3 +17,5 @@ texture = ExtResource("1_1mmmm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_kbrhl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

@@ -4,20 +4,23 @@ signal explosion
 
 @export var generate = true
 
-@export var grid_size = 100
+@export var grid_size = 60
 
-@export var dark_thickness = 25
+@export var dark_thickness = 15
 @export var spawn_area = 5
 
-@export var light_mine_chance = 0.08
-@export var dark_mine_chance = 0.1
+@export var light_mine_chance = 0.27
+@export var dark_mine_chance = 0.2
 
 @export var beacon_chance = 0.05
 @export var refill_chance = 0.2
+@export var enemy_chance = 0.2
 
 var mines = {} 
 var numbers = {}
 var pickaxe = null
+var beacons = {}
+var exit_tile = null
 
 var number_colors = {
 	1: '004fff',
@@ -65,6 +68,12 @@ func _ready():
 	var candidates = get_used_cells_by_id(0, -1, Vector2i.ZERO, 0)
 	pickaxe = candidates.pick_random()
 	mines.erase(pickaxe)
+	
+	# Place exit
+	var dark_tiles = get_used_cells_by_id(0, 0, Vector2i(0, 1), 0)
+	exit_tile = dark_tiles.pick_random()
+	
+	set_cell(0, exit_tile, 0, Vector2(1, 4), 0)
 
 	# Calculate numbers
 	for tile in mines.keys():
@@ -85,6 +94,10 @@ func mine_tile(mouse_coords):
 	var particles = load("res://tile_break_particles.tscn").instantiate()
 	particles.global_position = to_global(map_to_local(tile))
 	get_parent().add_child(particles)
+	
+	if beacons.has(tile):
+		beacons[tile].die = true
+		beacons.erase(tile)
 	
 	if mines.has(tile):
 		set_cell(0, tile, 0, Vector2i(2, 0), 0)
@@ -115,6 +128,7 @@ func mine_tile(mouse_coords):
 				
 				set_cell(0, tile, 0, Vector2i(2, 2), 0) # beacon
 				get_parent().add_child(beacon_light)
+				beacons[tile] = beacon_light
 			else:
 				set_cell(0, tile, 0, Vector2i(1, 0), 0)
 
@@ -169,38 +183,42 @@ func glow(number, pos):
 	
 	get_parent().add_child(g)
 
-func refill_tiles(player_pos, min_distance):
+func refill_tiles(player, min_distance):
 	for tile in get_used_cells(0):
+		if get_cell_tile_data(0, tile) == null:
+			continue
+		
 		if !get_cell_tile_data(0, tile).get_custom_data("refillable"):
 			continue
 		
-		# TODO: Check if tile is beacon tile to remove light
-		
 		if randf() <= refill_chance:
-			print("trying")
 			
 			var global_tile = to_global(map_to_local(tile))
 			
-			var x2 = (player_pos.x - global_tile.x) * (player_pos.x - global_tile.x)
-			var y2 = (player_pos.y - global_tile.y) * (player_pos.y - global_tile.y)
+			var x2 = (player.global_position.x - global_tile.x) * (player.global_position.x - global_tile.x)
+			var y2 = (player.global_position.y - global_tile.y) * (player.global_position.y - global_tile.y)
 			
 			if x2 + y2 <= min_distance * min_distance:
-				print("skipping")
 				continue
 			
-			if get_cell_atlas_coords(0, tile) == Vector2i(0, 1):
-				set_cell(0, tile, 0, Vector2i(1, 1), 0) # Dark tile
+			if get_cell_tile_data(0, tile).get_custom_data("is_dark_tile"):
+				set_cell(0, tile, 0, Vector2i(0, 1), 0)
 			else:
 				set_cell(0, tile, 0, Vector2i(0, 0), 0)
+			
+			if beacons.has(tile):
+				beacons[tile].die = true
+				beacons.erase(tile)
+		#elif randf() <= enemy_chance:
+			#var enemy = load("res://enemy.tscn").instantiate()
+			#enemy.global_position = to_global(map_to_local(tile))
+			#enemy.player = player
+			#get_parent().add_child(enemy)
 
+func get_exit_pos():
+	return to_global(map_to_local(exit_tile))
 
-
-
-
-
-
-
-
-
+func is_exit_pos(pos):
+	return get_cell_atlas_coords(0, local_to_map(to_local(pos))) == Vector2i(1, 4)
 
 

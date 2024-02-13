@@ -9,16 +9,20 @@ script = ExtResource("1_hpro8")
 
 [node name="MineTiles" parent="." instance=ExtResource("1_dm3v0")]
 rendering_quadrant_size = 10
-grid_size = 60
-dark_thickness = 15
-light_mine_chance = 0.27
-dark_mine_chance = 0.2
+grid_size = 20
+dark_thickness = 2
+light_mine_chance = 0.0
+dark_mine_chance = 0.0
+beacon_chance = 0.025
+refill_chance = 0.35
 
 [node name="Player" parent="." instance=ExtResource("2_bfqlt")]
 position = Vector2(577, 376)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
+
+[node name="Timer" type="Timer" parent="."]
 
 [connection signal="explosion" from="MineTiles" to="." method="_on_mine_tiles_explosion"]
 [connection signal="player_die" from="Player" to="." method="_on_player_player_die"]
