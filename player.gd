@@ -15,6 +15,7 @@ signal player_die
 const SPEED = 300.0
 
 var alive = true
+var run_physics = true
 var target_light_scale = 20
 
 var cam_trauma = 0.0
@@ -24,7 +25,7 @@ func _ready():
 	$PointLight2D.scale = Vector2.ZERO
 
 func _physics_process(delta):
-	if not alive:
+	if not alive or not run_physics:
 		return
 	
 	var dx = Input.get_axis("ui_left", "ui_right")

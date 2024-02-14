@@ -1,8 +1,41 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5uvi3223etk0"]
+[gd_scene load_steps=6 format=3 uid="uid://c5uvi3223etk0"]
 
 [ext_resource type="PackedScene" uid="uid://8vetmq48o32n" path="res://tile_map.tscn" id="1_dm3v0"]
 [ext_resource type="Script" path="res://level.gd" id="1_hpro8"]
 [ext_resource type="PackedScene" uid="uid://w5u6idihkwxn" path="res://player.tscn" id="2_bfqlt"]
+
+[sub_resource type="Animation" id="Animation_nndmp"]
+resource_name = "fade_out_win"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_71q34"]
+_data = {
+"fade_out_win": SubResource("Animation_nndmp")
+}
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_hpro8")
@@ -22,7 +55,23 @@ position = Vector2(577, 376)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
 [node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_71q34")
+}
 
 [connection signal="explosion" from="MineTiles" to="." method="_on_mine_tiles_explosion"]
 [connection signal="player_die" from="Player" to="." method="_on_player_player_die"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
