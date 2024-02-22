@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt87bckf4ksnb"]
+
+[ext_resource type="AudioStream" uid="uid://h2qss5mxsk7b" path="res://Hum.mp3" id="1_1wt8j"]
+[ext_resource type="Script" path="res://synth_sound.gd" id="2_044or"]
+
+[node name="SynthSound" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_1wt8j")
+volume_db = 15.0
+autoplay = true
+script = ExtResource("2_044or")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

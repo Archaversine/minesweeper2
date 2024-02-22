@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://qkv71v8vb6hl"]
+
+[ext_resource type="AudioStream" uid="uid://2b46u018u7bv" path="res://Escape.mp3" id="1_rkivl"]
+
+[node name="EscapeSound" type="AudioStreamPlayer"]
+stream = ExtResource("1_rkivl")

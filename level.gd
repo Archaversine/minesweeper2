@@ -26,6 +26,10 @@ func _ready():
 func _process(delta):
 	if player_touching_exit():
 		player.run_physics = false
+		
+		if not EscapeSound.playing:
+			EscapeSound.play()
+			
 		$AnimationPlayer.current_animation = "fade_out_win"
 		$AnimationPlayer.active = true
 	

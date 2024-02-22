@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cn3kpg8b8h378"]
+[gd_scene load_steps=13 format=3 uid="uid://cn3kpg8b8h378"]
 
 [ext_resource type="PackedScene" uid="uid://8vetmq48o32n" path="res://tile_map.tscn" id="1_4wrx2"]
 [ext_resource type="Texture2D" uid="uid://cmjg8wa2645xw" path="res://light.png" id="1_lynwf"]
@@ -15,6 +15,28 @@ border_width_bottom = 4
 border_color = Color(0.121569, 0.121569, 0.121569, 1)
 expand_margin_left = 4.0
 expand_margin_top = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5y0c"]
+bg_color = Color(0.313726, 0.313726, 0.313726, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.121569, 0.121569, 0.121569, 1)
+expand_margin_left = 4.0
+expand_margin_top = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j3cuj"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.121569, 0.121569, 0.121569, 1)
+expand_margin_left = 4.0
+expand_margin_top = 8.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sui71"]
 
 [sub_resource type="Animation" id="Animation_xtk3q"]
 resource_name = "fade_in"
@@ -133,6 +155,9 @@ theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("2_4fkpm")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_8ev6p")
+theme_override_styles/hover = SubResource("StyleBoxFlat_g5y0c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j3cuj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sui71")
 text = "START GAME"
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]

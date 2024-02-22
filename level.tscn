@@ -43,6 +43,8 @@ script = ExtResource("1_hpro8")
 
 [node name="MineTiles" parent="." instance=ExtResource("1_dm3v0")]
 rendering_quadrant_size = 10
+grid_size = 10
+dark_thickness = 2
 refill_chance = 0.35
 
 [node name="Player" parent="." instance=ExtResource("2_bfqlt")]

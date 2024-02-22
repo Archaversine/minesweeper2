@@ -124,6 +124,10 @@ func mine_tile(mouse_coords):
 			set_cell(0, tile, 0, Vector2i(2 + numbers[tile], 0), 0)
 		
 		glow(numbers[tile], tile)
+		
+		var synth = load("res://synth_sound.tscn").instantiate()
+		synth.global_position = to_global(map_to_local(tile))
+		get_parent().add_child(synth)
 	else:
 		if get_cell_atlas_coords(0, tile) == Vector2i(0, 1):
 			set_cell(0, tile, 0, Vector2i(1, 1), 0) # Dark tile
