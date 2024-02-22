@@ -5,7 +5,8 @@
 
 [node name="SynthSound" type="AudioStreamPlayer2D"]
 stream = ExtResource("1_1wt8j")
-volume_db = 15.0
+volume_db = -5.0
+pitch_scale = 2.5
 autoplay = true
 script = ExtResource("2_044or")
 
