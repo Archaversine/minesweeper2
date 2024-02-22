@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://13ptxmn3vnse"
-path="res://.godot/imported/Minesweeper.apple-touch-icon.png-ae0914aca42e2e4961c591187f24bdc6.ctex"
+path="res://.godot/imported/Minesweeper.apple-touch-icon.png-60aa239991fe0c9f60f3965d1dc35e8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://export/Minesweeper.apple-touch-icon.png"
-dest_files=["res://.godot/imported/Minesweeper.apple-touch-icon.png-ae0914aca42e2e4961c591187f24bdc6.ctex"]
+source_file="res://docs/Minesweeper.apple-touch-icon.png"
+dest_files=["res://.godot/imported/Minesweeper.apple-touch-icon.png-60aa239991fe0c9f60f3965d1dc35e8c.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3lrivmwxh34b"
-path="res://.godot/imported/Minesweeper.png-95e565df78ac6d6a15d4ff9d40951b31.ctex"
+path="res://.godot/imported/Minesweeper.png-5979faa1beca16a23f79f1039e682187.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://export/Minesweeper.png"
-dest_files=["res://.godot/imported/Minesweeper.png-95e565df78ac6d6a15d4ff9d40951b31.ctex"]
+source_file="res://docs/Minesweeper.png"
+dest_files=["res://.godot/imported/Minesweeper.png-5979faa1beca16a23f79f1039e682187.ctex"]
 
 [params]
 
