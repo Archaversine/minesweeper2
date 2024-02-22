@@ -6,6 +6,10 @@ var die = false
 func _ready():
 	color.a = 0
 
+func destroy():
+	die = true
+	$AudioStreamPlayer2D.stop()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if die:

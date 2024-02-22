@@ -49,7 +49,7 @@ func _on_player_player_die():
 
 func _on_mine_tiles_explosion():
 	player.add_cam_trauma(1)
-	mine_tiles.refill_tiles(mine_tiles, 50 * 6) # roughly 6 tiles
+	mine_tiles.refill_tiles(player, 50 * 3) # roughly 3 tiles
 
 func player_touching_exit():
 	return mine_tiles.is_exit_pos(player.global_position)
@@ -57,3 +57,6 @@ func player_touching_exit():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "fade_out_win":
 		get_tree().change_scene_to_file("res://win_screen.tscn")
+
+func _on_background_music_finished():
+	$BackgroundMusic.play()

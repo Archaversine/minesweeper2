@@ -12,7 +12,7 @@ signal explosion
 @export var light_mine_chance = 0.27
 @export var dark_mine_chance = 0.2
 
-@export var beacon_chance = 0.05
+@export var beacon_chance = 0.025
 @export var refill_chance = 0.2
 @export var enemy_chance = 0.2
 
@@ -91,12 +91,18 @@ func mine_tile(mouse_coords):
 	if !get_cell_tile_data(0, tile).get_custom_data("mineable"):
 		return
 	
+	if not $MiningSound.playing:
+		$MiningSound.play()
+		$StopMiningSound.start()
+	else:
+		$StopMiningSound.set_meta('refires', $StopMiningSound.get_meta("refires") + 1)
+	
 	var particles = load("res://tile_break_particles.tscn").instantiate()
 	particles.global_position = to_global(map_to_local(tile))
 	get_parent().add_child(particles)
 	
 	if beacons.has(tile):
-		beacons[tile].die = true
+		beacons[tile].destroy()
 		beacons.erase(tile)
 	
 	if mines.has(tile):
@@ -207,7 +213,7 @@ func refill_tiles(player, min_distance):
 				set_cell(0, tile, 0, Vector2i(0, 0), 0)
 			
 			if beacons.has(tile):
-				beacons[tile].die = true
+				beacons[tile].destroy()
 				beacons.erase(tile)
 		#elif randf() <= enemy_chance:
 			#var enemy = load("res://enemy.tscn").instantiate()
@@ -221,4 +227,14 @@ func get_exit_pos():
 func is_exit_pos(pos):
 	return get_cell_atlas_coords(0, local_to_map(to_local(pos))) == Vector2i(1, 4)
 
-
+func _on_stop_mining_sound_timeout():
+	var refires = $StopMiningSound.get_meta("refires")
+	
+	if refires > 0:
+		$StopMiningSound.set_meta("refires", refires - 1)
+		$StopMiningSound.start()
+		return
+	
+	var pos = $MiningSound.get_playback_position()
+	$MiningSound.stop()
+	$MiningSound.seek(pos)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5uvi3223etk0"]
+[gd_scene load_steps=7 format=3 uid="uid://c5uvi3223etk0"]
 
 [ext_resource type="PackedScene" uid="uid://8vetmq48o32n" path="res://tile_map.tscn" id="1_dm3v0"]
 [ext_resource type="Script" path="res://level.gd" id="1_hpro8"]
 [ext_resource type="PackedScene" uid="uid://w5u6idihkwxn" path="res://player.tscn" id="2_bfqlt"]
+[ext_resource type="AudioStream" uid="uid://dsxvhoq5rewxu" path="res://OminousNightMaster.mp3" id="4_66k67"]
 
 [sub_resource type="Animation" id="Animation_nndmp"]
 resource_name = "fade_out_win"
@@ -42,7 +43,6 @@ script = ExtResource("1_hpro8")
 
 [node name="MineTiles" parent="." instance=ExtResource("1_dm3v0")]
 rendering_quadrant_size = 10
-beacon_chance = 0.025
 refill_chance = 0.35
 
 [node name="Player" parent="." instance=ExtResource("2_bfqlt")]
@@ -61,13 +61,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="Timer" type="Timer" parent="."]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_71q34")
 }
 
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_66k67")
+autoplay = true
+
 [connection signal="explosion" from="MineTiles" to="." method="_on_mine_tiles_explosion"]
 [connection signal="player_die" from="Player" to="." method="_on_player_player_die"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="finished" from="BackgroundMusic" to="." method="_on_background_music_finished"]

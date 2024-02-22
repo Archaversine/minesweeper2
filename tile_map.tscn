@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://8vetmq48o32n"]
+[gd_scene load_steps=18 format=3 uid="uid://8vetmq48o32n"]
 
 [ext_resource type="Texture2D" uid="uid://di41vggwk0vv6" path="res://tiles.png" id="1_13goj"]
 [ext_resource type="Script" path="res://tile_map.gd" id="2_qwpvr"]
+[ext_resource type="AudioStream" uid="uid://1404bls0wuaw" path="res://Mining.mp3" id="3_nm3b4"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wu5ck"]
 polygon = PackedVector2Array(-5, -5, 5, -5, 5, 5, -5, 5)
@@ -253,3 +254,13 @@ scale = Vector2(5, 5)
 tile_set = SubResource("TileSet_xfh1m")
 format = 2
 script = ExtResource("2_qwpvr")
+
+[node name="MiningSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nm3b4")
+
+[node name="StopMiningSound" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+metadata/refires = 0
+
+[connection signal="timeout" from="StopMiningSound" to="." method="_on_stop_mining_sound_timeout"]
